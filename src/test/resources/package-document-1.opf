@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uuid">
+	<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+		<dc:title>Example Book</dc:title>
+		<dc:creator>John Doe</dc:creator>
+		<dc:creator>Joe Schmoe</dc:creator>
+		<dc:date>2010</dc:date>
+		<dc:identifier id="uuid"></dc:identifier>
+		<dc:language>en</dc:language>
+		<dc:publisher>Example Publisher</dc:publisher>
+	</metadata>
+	<manifest>
+	</manifest>
+	<spine>
+	</spine>
+</package>
