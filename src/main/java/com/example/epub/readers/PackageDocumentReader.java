@@ -1,6 +1,6 @@
 package com.example.epub.readers;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 
 import javax.xml.parsers.*;
@@ -16,14 +16,23 @@ public class PackageDocumentReader
 	
 	public PackageDocumentReader(File file)
 	{
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		factory.setNamespaceAware(true);
+		XMLReader xmlReader = getXmlReader();
 		try
 		{
-			SAXParser saxParser = factory.newSAXParser();
-			XMLReader xmlReader = saxParser.getXMLReader();
-			xmlReader.setContentHandler(new PackageDocumentHandler());
 			xmlReader.parse("file:" + file.getAbsolutePath());
+		}
+		catch (Exception exception)
+		{
+			System.out.println("PackageDocumentReader: " + exception.getMessage());
+		}
+	}
+	
+	public PackageDocumentReader(InputStream inputStream)
+	{
+		XMLReader xmlReader = getXmlReader();
+		try
+		{
+			xmlReader.parse(new InputSource(inputStream));
 		}
 		catch (Exception exception)
 		{
@@ -71,5 +80,23 @@ public class PackageDocumentReader
 			}
 		}
 		
+	}
+	
+	private XMLReader getXmlReader()
+	{
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		factory.setNamespaceAware(true);
+		try
+		{
+			SAXParser saxParser = factory.newSAXParser();
+			XMLReader xmlReader = saxParser.getXMLReader();
+			xmlReader.setContentHandler(new PackageDocumentHandler());
+			return xmlReader;
+		}
+		catch (Exception exception)
+		{
+			System.out.println("ContainerDocumentReader: " + exception.getMessage());
+		}
+		return null;
 	}
 }

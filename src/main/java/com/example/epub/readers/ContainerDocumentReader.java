@@ -1,6 +1,6 @@
 package com.example.epub.readers;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 import javax.xml.parsers.*;
@@ -16,13 +16,9 @@ public class ContainerDocumentReader
 	
 	public ContainerDocumentReader(File file)
 	{
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		factory.setNamespaceAware(true);
+		XMLReader xmlReader = getXmlReader();
 		try
 		{
-			SAXParser saxParser = factory.newSAXParser();
-			XMLReader xmlReader = saxParser.getXMLReader();
-			xmlReader.setContentHandler(new ContainerDocumentHandler());
 			xmlReader.parse("file:" + file.getAbsolutePath());
 		}
 		catch (Exception exception)
@@ -30,6 +26,20 @@ public class ContainerDocumentReader
 			System.out.println("ContainerDocumentReader: " + exception.getMessage());
 		}
 	}
+	
+	public ContainerDocumentReader(InputStream inputStream)
+	{
+		XMLReader xmlReader = getXmlReader();
+		try
+		{
+			xmlReader.parse(new InputSource(inputStream));
+		}
+		catch (Exception exception)
+		{
+			System.out.println("ContainerDocumentReader: " + exception.getMessage());
+		}
+	}
+	
 	
 	public ContainerDocument getContainerDocument()
 	{
@@ -59,5 +69,23 @@ public class ContainerDocumentReader
 			}
 		}
 		
+	}
+	
+	private XMLReader getXmlReader()
+	{
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		factory.setNamespaceAware(true);
+		try
+		{
+			SAXParser saxParser = factory.newSAXParser();
+			XMLReader xmlReader = saxParser.getXMLReader();
+			xmlReader.setContentHandler(new ContainerDocumentHandler());
+			return xmlReader;
+		}
+		catch (Exception exception)
+		{
+			System.out.println("ContainerDocumentReader: " + exception.getMessage());
+		}
+		return null;
 	}
 }

@@ -1,5 +1,6 @@
 package com.example.epub.readers;
 
+import java.io.*;
 import java.nio.file.*;
 import java.util.List;
 import org.junit.jupiter.api.*;
@@ -8,10 +9,11 @@ import org.junit.jupiter.api.*;
 public class PackageDocumentReaderTests
 {
 	PackageDocumentReader reader;
+	Path path;
 	
 	public PackageDocumentReaderTests()
 	{
-		Path path = Paths.get("src/test/resources/package-document-1.opf");
+		path = Paths.get("src/test/resources/package-document-1.opf");
 		reader = new PackageDocumentReader(path.toFile());
 		System.out.println(reader.getPackageDocument());
 	}
@@ -38,5 +40,14 @@ public class PackageDocumentReaderTests
 	{
 		String publisher = reader.getPackageDocument().getPublisher();
 		Assertions.assertEquals("Example Publisher", publisher);
+	}
+	
+	@Test
+	public void readInputStream() throws Exception
+	{
+		InputStream inputStream = new FileInputStream(path.toFile());
+		reader = new PackageDocumentReader(inputStream);
+		String title = reader.getPackageDocument().getTitle();
+		Assertions.assertEquals("Example Book", title);
 	}
 }
