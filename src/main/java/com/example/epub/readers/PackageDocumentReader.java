@@ -25,7 +25,7 @@ public class PackageDocumentReader
 		}
 		catch (Exception exception)
 		{
-			System.out.println("PackageDocumentReader: " + exception.getMessage());
+			throw new RuntimeException(exception);
 		}
 	}
 	
@@ -38,7 +38,7 @@ public class PackageDocumentReader
 		}
 		catch (Exception exception)
 		{
-			System.out.println("PackageDocumentReader: " + exception.getMessage());
+			throw new RuntimeException(exception);
 		}
 	}
 	
@@ -124,8 +124,7 @@ public class PackageDocumentReader
 		}
 		catch (Exception exception)
 		{
-			System.out.println("ContainerDocumentReader: " + exception.getMessage());
+			throw new RuntimeException(exception);
 		}
-		return null;
 	}
 }
