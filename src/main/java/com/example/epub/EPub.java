@@ -2,6 +2,7 @@ package com.example.epub;
 
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.zip.*;
 
 import com.example.epub.readers.*;
@@ -23,6 +24,11 @@ public class EPub
 	public String getTitle()
 	{
 		return packageDocument.getTitle();
+	}
+	
+	public List<String> getAuthors()
+	{
+		return packageDocument.getAuthors();
 	}
 	
 	private void readContainerDocument()
