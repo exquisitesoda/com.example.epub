@@ -48,7 +48,8 @@ public class PackageDocument
 	public String toString()
 	{
 		return "PackageDocument(title=" + title + ", "
-			+ "authors=[" + authors.stream().collect(Collectors.joining(", ")) + "]"
+			+ "authors=[" + authors.stream().collect(Collectors.joining(", ")) + "], "
+			+ "manifest=[" + manifest.stream().map(packageItem -> packageItem.toString()).collect(Collectors.joining(", ")) + "]"
 			+ ")";
 	}
 }
