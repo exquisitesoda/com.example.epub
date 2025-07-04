@@ -31,6 +31,11 @@ public class EPub
 		return packageDocument.getAuthors();
 	}
 	
+	public PackageDocument getPackageDocument()
+	{
+		return packageDocument;
+	}
+	
 	private void readContainerDocument()
 	{
 		ZipEntry entry = zipFile.getEntry("META-INF/container.xml");
