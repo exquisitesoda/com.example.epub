@@ -88,8 +88,10 @@ public class PackageDocumentReader
 					break;
 				case "publisher":
 					packageDocument.setPublisher(contentBuffer.toString());
+					break;
 				case "manifest":
 					packageDocument.setManifest(packageManifest);
+					break;
 				default:
 					// todo
 					break;
