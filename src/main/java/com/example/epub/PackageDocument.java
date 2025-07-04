@@ -8,7 +8,7 @@ public class PackageDocument
 	private String title;
 	private List<String> authors;
 	private String publisher;
-	private List<PackageItem> manifest;
+	private PackageManifest manifest;
 	private ArrayList<PackageItem> spine;
 	
 
@@ -36,12 +36,12 @@ public class PackageDocument
 		this.publisher = publisher;
 	}
 	
-	public List<PackageItem> getManifest()
+	public PackageManifest getManifest()
 	{
 		return manifest;
 	}
 	
-	public void setManifest(List<PackageItem> manifest)
+	public void setManifest(PackageManifest manifest)
 	{
 		this.manifest = manifest;
 	}
@@ -60,7 +60,7 @@ public class PackageDocument
 	{
 		return "PackageDocument(title=" + title + ", "
 			+ "authors=[" + authors.stream().collect(Collectors.joining(", ")) + "], "
-			+ "manifest=[" + manifest.stream().map(packageItem -> packageItem.toString()).collect(Collectors.joining(", ")) + "]"
+			+ "manifest=[" + manifest + "]"
 			+ ")";
 	}
 }

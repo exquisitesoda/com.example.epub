@@ -13,7 +13,7 @@ public class PackageDocumentReader
 {
 	private PackageDocument packageDocument = new PackageDocument();
 	private ArrayList<String> authors = new ArrayList<>();
-	private List<PackageItem> packageManifest = new ArrayList<>();
+	private PackageManifest packageManifest = new PackageManifest();
 	private ArrayList<PackageItem> spine = new ArrayList<>();
 	
 	public PackageDocumentReader(File file)
