@@ -2,7 +2,8 @@ package com.example.epub.readers;
 
 import java.io.*;
 import java.nio.file.*;
-import java.util.List;
+import java.util.*;
+
 import org.junit.jupiter.api.*;
 import com.example.epub.*;
 
@@ -57,5 +58,12 @@ public class PackageDocumentReaderTests
 	{
 		List<PackageItem> manifest = reader.getPackageDocument().getManifest();
 		Assertions.assertEquals(4, manifest.size());
+	}
+	
+	@Test
+	public void readSpine()
+	{
+		ArrayList<PackageItem> spine = reader.getPackageDocument().getSpine();
+		Assertions.assertEquals(4, spine.size());
 	}
 }

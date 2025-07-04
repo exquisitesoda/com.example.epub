@@ -14,6 +14,7 @@ public class PackageDocumentReader
 	private PackageDocument packageDocument = new PackageDocument();
 	private ArrayList<String> authors = new ArrayList<>();
 	private List<PackageItem> packageManifest = new ArrayList<>();
+	private ArrayList<PackageItem> spine = new ArrayList<>();
 	
 	public PackageDocumentReader(File file)
 	{
@@ -63,6 +64,13 @@ public class PackageDocumentReader
 					}};
 					packageManifest.add(packageItem);
 					break;
+				case "itemref":
+					String idref = attributes.getValue("idref");
+					PackageItem pi = packageManifest.stream()
+						.filter(item -> item.getId().equals(idref))
+						.findFirst().get();
+					spine.add(pi);
+					break;
 				default:
 					break;
 			}
@@ -91,6 +99,9 @@ public class PackageDocumentReader
 					break;
 				case "manifest":
 					packageDocument.setManifest(packageManifest);
+					break;
+				case "spine":
+					packageDocument.setSpine(spine);
 					break;
 				default:
 					// todo

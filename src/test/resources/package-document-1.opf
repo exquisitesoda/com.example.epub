@@ -15,6 +15,10 @@
 		<item id="ch02" href="ch02.html" media-type="application/xhtml+xml" />
 		<item id="ch03" href="ch03.html" media-type="application/xhtml+xml" />
 	</manifest>
-	<spine>
+	<spine toc="nocx">
+		<itemref idref="cover" />
+		<itemref idref="ch01" />
+		<itemref idref="ch02" />
+		<itemref idref="ch03" />
 	</spine>
 </package>

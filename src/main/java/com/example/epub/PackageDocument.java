@@ -1,6 +1,6 @@
 package com.example.epub;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class PackageDocument
@@ -9,6 +9,7 @@ public class PackageDocument
 	private List<String> authors;
 	private String publisher;
 	private List<PackageItem> manifest;
+	private ArrayList<PackageItem> spine;
 	
 
 	public String getTitle() {
@@ -43,6 +44,16 @@ public class PackageDocument
 	public void setManifest(List<PackageItem> manifest)
 	{
 		this.manifest = manifest;
+	}
+	
+	public ArrayList<PackageItem> getSpine()
+	{
+		return spine;
+	}
+	
+	public void setSpine(ArrayList<PackageItem> spine)
+	{
+		this.spine = spine;
 	}
 	
 	public String toString()
