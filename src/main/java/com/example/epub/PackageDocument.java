@@ -8,7 +8,7 @@ public class PackageDocument
 	private String title;
 	private List<String> authors;
 	private String publisher;
-	private PackageManifest manifest;
+	private List<PackageItem> manifest;
 	
 
 	public String getTitle() {
@@ -35,12 +35,12 @@ public class PackageDocument
 		this.publisher = publisher;
 	}
 	
-	public PackageManifest getManifest()
+	public List<PackageItem> getManifest()
 	{
 		return manifest;
 	}
 	
-	public void setManifest(PackageManifest manifest)
+	public void setManifest(List<PackageItem> manifest)
 	{
 		this.manifest = manifest;
 	}

@@ -1,7 +1,7 @@
 package com.example.epub.readers;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 
 import javax.xml.parsers.*;
 import org.xml.sax.*;
@@ -13,7 +13,7 @@ public class PackageDocumentReader
 {
 	private PackageDocument packageDocument = new PackageDocument();
 	private ArrayList<String> authors = new ArrayList<>();
-	private PackageManifest packageManifest = new PackageManifest();
+	private List<PackageItem> packageManifest = new ArrayList<>();
 	
 	public PackageDocumentReader(File file)
 	{
@@ -56,9 +56,12 @@ public class PackageDocumentReader
 			switch (localName)
 			{
 				case "item":
-					String id = attributes.getValue("id");
-					String href = attributes.getValue("href");
-					packageManifest.putItem(id, href);
+					PackageItem packageItem = new PackageItem() {{
+						setId(attributes.getValue("id"));
+						setHref(attributes.getValue("href"));
+						setMediaType(attributes.getValue("media-type"));
+					}};
+					packageManifest.add(packageItem);
 					break;
 				default:
 					break;
