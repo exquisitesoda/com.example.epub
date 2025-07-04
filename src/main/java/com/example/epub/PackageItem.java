@@ -36,4 +36,9 @@ public class PackageItem
 	{
 		this.mediaType = mediaType;
 	}
+	
+	public String toString()
+	{
+		return String.format("PackageItem(id: \"%s\", href: \"%s\", mediaType: \"%s\")", id, href, mediaType);
+	}
 }
