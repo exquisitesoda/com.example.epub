@@ -7,12 +7,13 @@ import javax.xml.parsers.*;
 import org.xml.sax.*;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.example.epub.PackageDocument;
+import com.example.epub.*;
 
 public class PackageDocumentReader 
 {
 	private PackageDocument packageDocument = new PackageDocument();
 	private ArrayList<String> authors = new ArrayList<>();
+	private PackageManifest packageManifest = new PackageManifest();
 	
 	public PackageDocumentReader(File file)
 	{
@@ -52,6 +53,16 @@ public class PackageDocumentReader
 		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
 		{
 			contentBuffer = new StringBuffer();
+			switch (localName)
+			{
+				case "item":
+					String id = attributes.getValue("id");
+					String href = attributes.getValue("href");
+					packageManifest.putItem(id, href);
+					break;
+				default:
+					break;
+			}
 		}
 		
 		public void characters(char[] ch, int start, int length) throws SAXException
@@ -74,6 +85,8 @@ public class PackageDocumentReader
 					break;
 				case "publisher":
 					packageDocument.setPublisher(contentBuffer.toString());
+				case "manifest":
+					packageDocument.setManifest(packageManifest);
 				default:
 					// todo
 					break;

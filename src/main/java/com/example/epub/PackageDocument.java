@@ -8,6 +8,7 @@ public class PackageDocument
 	private String title;
 	private List<String> authors;
 	private String publisher;
+	private PackageManifest manifest;
 	
 
 	public String getTitle() {
@@ -32,6 +33,16 @@ public class PackageDocument
 	
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
+	}
+	
+	public PackageManifest getManifest()
+	{
+		return manifest;
+	}
+	
+	public void setManifest(PackageManifest manifest)
+	{
+		this.manifest = manifest;
 	}
 	
 	public String toString()

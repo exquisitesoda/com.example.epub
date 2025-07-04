@@ -5,6 +5,8 @@ import java.nio.file.*;
 import java.util.List;
 import org.junit.jupiter.api.*;
 
+import com.example.epub.PackageManifest;
+
 
 public class PackageDocumentReaderTests
 {
@@ -49,5 +51,12 @@ public class PackageDocumentReaderTests
 		reader = new PackageDocumentReader(inputStream);
 		String title = reader.getPackageDocument().getTitle();
 		Assertions.assertEquals("Example Book", title);
+	}
+	
+	@Test
+	public void readManifest()
+	{
+		PackageManifest manifest = reader.getPackageDocument().getManifest();
+		Assertions.assertEquals(4, manifest.size());
 	}
 }

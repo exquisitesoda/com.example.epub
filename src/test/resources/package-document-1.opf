@@ -10,6 +10,10 @@
 		<dc:publisher>Example Publisher</dc:publisher>
 	</metadata>
 	<manifest>
+		<item id="cover" href="cover.html" media-type="application/xhtml+xml" />
+		<item id="ch01" href="ch01.html" media-type="application/xhtml+xml" />
+		<item id="ch02" href="ch02.html" media-type="application/xhtml+xml" />
+		<item id="ch03" href="ch03.html" media-type="application/xhtml+xml" />
 	</manifest>
 	<spine>
 	</spine>
