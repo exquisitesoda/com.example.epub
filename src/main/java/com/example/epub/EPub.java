@@ -2,6 +2,7 @@ package com.example.epub;
 
 
 import java.io.InputStream;
+import java.nio.file.*;
 import java.util.List;
 import java.util.zip.*;
 
@@ -12,6 +13,8 @@ public class EPub
 	private ZipFile zipFile;
 	private ContainerDocument containerDocument;
 	private PackageDocument packageDocument;
+	
+	private Path baseZipPath;
 	
 	
 	public EPub(ZipFile zipFile)
@@ -36,6 +39,28 @@ public class EPub
 		return packageDocument;
 	}
 	
+	public InputStream getContent(String path)
+	{
+		Path combinedPath = baseZipPath.resolve(path);
+		String resolvedPath = combinedPath.toString().replaceAll("\\\\", "/");
+		ZipEntry entry = zipFile.getEntry(resolvedPath);
+		try
+		{
+			InputStream inputStream = zipFile.getInputStream(entry);
+			return inputStream;
+		}
+		catch (Exception exception)
+		{
+			throw new RuntimeException("could not get " + resolvedPath + " from zipfile of " + zipFile.getName(), exception);
+		}
+	}
+	
+	public InputStream getContent(PackageItem packageItem)
+	{
+		String path = packageItem.getHref();
+		return getContent(path);
+	}
+	
 	private void readContainerDocument()
 	{
 		ZipEntry entry = zipFile.getEntry("META-INF/container.xml");
@@ -50,6 +75,8 @@ public class EPub
 			System.out.println("could not open container.xml");
 			
 		}
+		String packagePath = containerDocument.getRootFiles().get(0);
+		baseZipPath = Path.of(packagePath).getParent();
 	}
 	
 	private void readPackageDocument()
